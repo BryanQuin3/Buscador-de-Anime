@@ -37,6 +37,48 @@ menuBtn.addEventListener("click", () => {
   carousel.classList.toggle("hidden");
 });
 
+// Search
+const searchBtn = document.querySelector(".search-container");
+const searchInput = document.querySelector(".search-input-container");
+searchBtn.addEventListener("click", () => {
+  searchInput.classList.toggle("hidden");
+});
+
+// Search-API
+const results = document.querySelector(".results");
+function createSearchCard(anime) {
+  const titleOfAnime = anime.name;
+  const src = anime.image_url;
+  const animeContainer = `<article class="anime-container">
+        <figure class="img-container">
+        <img class="cover-img" src="${src}" alt="">
+        </figure>
+        <h4 class="anime-title">${titleOfAnime}</h4>
+        </article>`;
+  results += animeContainer;
+}
+
+function search(animeName) {
+  fetch(
+    `https://myanimelist.net/search/prefix.json?type=anime&keyword=${animeName}&v=1`
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      const animes = response.categories[0].items;
+      animes.forEach((anime) => {
+        createSearchCard(anime);
+        console.log(animeName);
+      });
+    });
+}
+
+// cuando se presiona enter en el input de busqueda se ejecuta la funcion search
+searchInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    const animeName = document.querySelector(".search-input").value;
+    search(animeName);
+  }
+});
 // Slider
 const container = document.querySelector(".carousel-container");
 const cards = document.querySelectorAll(".carousel-card");
