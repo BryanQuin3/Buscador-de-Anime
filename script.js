@@ -31,8 +31,10 @@ const menuBtn = document.querySelector(".header-svg-icon");
 menuBtn.addEventListener("click", () => {
   const menu = document.querySelector(".menu-phone");
   const main = document.querySelector("main");
+  const carousel = document.querySelector(".hero-carousel");
   menu.classList.toggle("hidden");
   main.classList.toggle("hidden");
+  carousel.classList.toggle("hidden");
 });
 
 // Slider

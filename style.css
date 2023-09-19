@@ -228,12 +228,16 @@ main {
 
 .carousel-container {
   display: flex;
-  overflow-x: hidden;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   width: 100%;
   white-space: nowrap;
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
 }
 
 .carousel-card {
@@ -245,11 +249,12 @@ main {
 
 .card-img-container {
   margin: 0;
+  position: relative;
 }
 
 .card-img {
   width: 100%;
-  max-height: 90vh;
+  max-height: 91vh;
   object-fit: cover;
 }
 
@@ -278,7 +283,7 @@ main {
 .btn-crunchy {
   background-color: var(--oragenge);
   border: none;
-  padding: 10px 20px;
+  padding: 10px 40px;
   color: var(--gray);
   font-size: 15px;
   text-transform: uppercase;
@@ -324,4 +329,14 @@ main {
 .favorite:hover {
   cursor: pointer;
   border: 2px solid #ff8839;
+}
+
+.anime-logo {
+  width: 60%;
+  height: auto;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
