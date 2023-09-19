@@ -25,3 +25,11 @@ fetch(apiUrl)
       createAnimeCard(anime);
     });
   });
+
+const menuBtn = document.querySelector(".header-svg-icon");
+menuBtn.addEventListener("click", () => {
+  const menu = document.querySelector(".menu-phone");
+  const main = document.querySelector("main");
+  menu.classList.toggle("hidden");
+  main.classList.toggle("hidden");
+});
