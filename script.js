@@ -1,5 +1,5 @@
+// API
 const animeList = document.querySelector("main");
-
 const apiUrl = `https://api.jikan.moe/v4/top/anime`;
 
 function createAnimeCard(anime) {
@@ -26,6 +26,7 @@ fetch(apiUrl)
     });
   });
 
+// Menu
 const menuBtn = document.querySelector(".header-svg-icon");
 menuBtn.addEventListener("click", () => {
   const menu = document.querySelector(".menu-phone");
@@ -33,3 +34,25 @@ menuBtn.addEventListener("click", () => {
   menu.classList.toggle("hidden");
   main.classList.toggle("hidden");
 });
+
+// Slider
+const container = document.querySelector(".carousel-container");
+const cards = document.querySelectorAll(".carousel-card");
+let currentIndex = 0;
+
+function scrollToCard(index) {
+  const card = cards[index];
+  container.scrollTo({
+    left: card.offsetLeft,
+    behavior: "smooth",
+  });
+}
+
+function nextCard() {
+  currentIndex = (currentIndex + 1) % cards.length;
+  scrollToCard(currentIndex);
+}
+
+setInterval(() => {
+  nextCard();
+}, 2500);

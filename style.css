@@ -223,10 +223,24 @@ main {
 }
 
 .hero-carousel {
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  width: 100%;
+  white-space: nowrap;
 }
 
 .carousel-card {
   position: relative;
+  width: 100%; /* Asegura que las tarjetas ocupen todo el ancho del contenedor */
+  scroll-snap-align: start; /* Alinea las tarjetas en el inicio del contenedor */
+  flex: 0 0 auto;
 }
 
 .card-img-container {
@@ -235,7 +249,7 @@ main {
 
 .card-img {
   width: 100%;
-  height: auto;
+  max-height: 90vh;
   object-fit: cover;
 }
 
