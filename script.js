@@ -62,7 +62,8 @@ function createSearchCard(anime) {
 }
 
 function search(animeName) {
-  fetch(`http://localhost:3000/search?animeName=${animeName}`)
+  const url = `https://bryanquin3.github.io/Buscador-de-Anime/server.js`;
+  fetch(`${url}/search?animeName=${animeName}`)
     .then((response) => response.json())
     .then((response) => {
       const animes = response.categories[0].items;
