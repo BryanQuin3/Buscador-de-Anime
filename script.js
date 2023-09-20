@@ -93,4 +93,4 @@ function nextCard() {
 
 setInterval(() => {
   nextCard();
-}, 2500);
+}, 3000);

@@ -164,9 +164,10 @@ main {
   display: grid;
   place-items: center;
   align-items: flex-start;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   min-height: 100vh;
   background-color: #000;
+  gap: 18px;
 }
 
 .anime-container {
