@@ -158,7 +158,8 @@ a:hover {
   border-radius: 50%;
 }
 
-.results-container {
+.results-container,
+main {
   display: grid;
   place-items: center;
   align-items: flex-start;

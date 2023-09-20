@@ -40,12 +40,15 @@ menuBtn.addEventListener("click", () => {
 // Search
 const searchBtn = document.querySelector(".search-container");
 const searchInput = document.querySelector(".search-input-container");
+const heroContainer = document.querySelector(".hero-carousel");
 searchBtn.addEventListener("click", () => {
   searchInput.classList.toggle("hidden");
+  heroContainer.classList.toggle("hidden");
+  document.querySelector("main").classList.toggle("hidden");
 });
 
 // Search-API
-const results = document.querySelector(".results");
+let results = document.querySelector(".results");
 function createSearchCard(anime) {
   const titleOfAnime = anime.name;
   const src = anime.image_url;
@@ -55,19 +58,16 @@ function createSearchCard(anime) {
         </figure>
         <h4 class="anime-title">${titleOfAnime}</h4>
         </article>`;
-  results += animeContainer;
+  results.innerHTML += animeContainer;
 }
 
 function search(animeName) {
-  fetch(
-    `https://myanimelist.net/search/prefix.json?type=anime&keyword=${animeName}&v=1`
-  )
+  fetch(`http://localhost:3000/search?animeName=${animeName}`)
     .then((response) => response.json())
     .then((response) => {
       const animes = response.categories[0].items;
       animes.forEach((anime) => {
         createSearchCard(anime);
-        console.log(animeName);
       });
     });
 }
