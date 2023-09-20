@@ -2,7 +2,7 @@
 const animeList = document.querySelector("main");
 const apiUrl = `https://api.jikan.moe/v4/top/anime`;
 
-function createAnimeCard(anime) {
+function createAnimeCard(anime, elemento) {
   const titleOfAnime = anime.title;
   const src = anime.images?.jpg?.large_image_url;
   const animeContainer = `<article class="anime-container">
@@ -14,7 +14,7 @@ function createAnimeCard(anime) {
         </figure>
         <h4 class="anime-title">${titleOfAnime}</h4>
         </article>`;
-  animeList.innerHTML += animeContainer;
+  elemento.innerHTML += animeContainer;
 }
 
 fetch(apiUrl)
@@ -22,7 +22,7 @@ fetch(apiUrl)
   .then((response) => {
     const animes = response.data;
     animes.forEach((anime) => {
-      createAnimeCard(anime);
+      createAnimeCard(anime, animeList);
     });
   });
 
@@ -49,26 +49,18 @@ searchBtn.addEventListener("click", () => {
 
 // Search-API
 let results = document.querySelector(".results");
-function createSearchCard(anime) {
-  const titleOfAnime = anime.name;
-  const src = anime.image_url;
-  const animeContainer = `<article class="anime-container">
-        <figure class="img-container">
-        <img class="cover-img" src="${src}" alt="">
-        </figure>
-        <h4 class="anime-title">${titleOfAnime}</h4>
-        </article>`;
-  results.innerHTML += animeContainer;
-}
 
 function search(animeName) {
-  const url = `https://bryanquin3.github.io/Buscador-de-Anime/server.js`;
-  fetch(`${url}/search?animeName=${animeName}`)
+  fetch(`https://api.jikan.moe/v4/anime`)
     .then((response) => response.json())
     .then((response) => {
-      const animes = response.categories[0].items;
+      const animes = response.data;
       animes.forEach((anime) => {
-        createSearchCard(anime);
+        const name = anime.title;
+        // si name incluye el animeName que se busca se crea una card
+        if (name.includes(animeName)) {
+          createAnimeCard(anime, results);
+        }
       });
     });
 }
@@ -76,6 +68,7 @@ function search(animeName) {
 // cuando se presiona enter en el input de busqueda se ejecuta la funcion search
 searchInput.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
+    results.innerHTML = "";
     const animeName = document.querySelector(".search-input").value;
     search(animeName);
   }
