@@ -1,5 +1,5 @@
 // API
-const animeList = document.querySelector("main");
+const animeList = document.querySelector(".list-container");
 const apiUrl = `https://api.jikan.moe/v4/top/anime`;
 
 function createAnimeCard(anime, elemento) {
@@ -12,7 +12,7 @@ function createAnimeCard(anime, elemento) {
         </a>
         <img class="cover-img" src="${src}" alt="">
         </figure>
-        <h4 class="anime-title">${titleOfAnime}</h4>
+        <p class="anime-title">${titleOfAnime}</p>
         </article>`;
   elemento.innerHTML += animeContainer;
 }
@@ -91,6 +91,6 @@ function nextCard() {
   scrollToCard(currentIndex);
 }
 
-setInterval(() => {
-  nextCard();
-}, 2500);
+// setInterval(() => {
+//   nextCard();
+// }, 2500);

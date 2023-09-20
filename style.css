@@ -6,14 +6,14 @@
   --tertiaryColor: #a0a0a0;
 }
 body {
-  background-color: #23252b;
+  background-color: #000;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   color: #fff;
   text-align: left;
-  margin: 15px 0 15px 0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -24,11 +24,11 @@ body {
 }
 
 header {
+  background-color: #23252b;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  padding: 0 15px;
+  padding: 15px;
 }
 nav {
   margin: 0;
@@ -165,22 +165,21 @@ main {
   align-items: flex-start;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   min-height: 100vh;
-  margin-top: 20px;
+  background-color: #000;
 }
 
 .anime-container {
   display: flex;
+  width: 155px;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 170px;
   transition: all 0.3s ease-in-out;
 }
 
 .anime-container:hover > .anime-title,
 .anime-container:hover .play-icon {
   /* color azul */
-  color: #358dec;
+  color: var(--oragenge);
   opacity: 1;
   cursor: pointer;
 }
@@ -195,7 +194,6 @@ main {
   width: 150px;
   height: 220px;
   overflow: hidden;
-  border-radius: 5px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   object-fit: contain;
   margin: 0;
@@ -224,10 +222,10 @@ main {
 .anime-title {
   font-size: 13px;
   margin: 10px 0;
-  text-align: center;
-  word-wrap: break-word;
-  width: auto;
-  max-width: 20ch;
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que el texto se ha truncado */
+  overflow: hidden; /* Oculta el contenido que se desborda del párrafo */
+  max-width: 100%;
 }
 
 .main-list {
@@ -370,4 +368,29 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
+}
+
+.list-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.anime-list {
+  width: 90%;
+  margin-left: 30px;
+}
+
+.anime-list-scroll-wrapper {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.anime-list-scroll-wrapper::-webkit-scrollbar {
+  display: none;
 }
