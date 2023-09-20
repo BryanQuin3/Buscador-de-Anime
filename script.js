@@ -51,7 +51,7 @@ searchBtn.addEventListener("click", () => {
 let results = document.querySelector(".results");
 
 function search(animeName) {
-  fetch(`https://api.jikan.moe/v4/anime`)
+  fetch(`https://api.jikan.moe/v4/anime?q=${animeName}`)
     .then((response) => response.json())
     .then((response) => {
       const animes = response.data;
@@ -91,6 +91,6 @@ function nextCard() {
   scrollToCard(currentIndex);
 }
 
-// setInterval(() => {
-//   nextCard();
-// }, 2500);
+setInterval(() => {
+  nextCard();
+}, 2500);
