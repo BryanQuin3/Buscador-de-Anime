@@ -285,7 +285,7 @@ main {
 
 .card-img {
   width: 100%;
-  max-height: 91vh;
+  max-height: 95vh;
   object-fit: cover;
 }
 
