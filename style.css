@@ -118,6 +118,7 @@ a:hover {
 .search-input-container {
   margin: auto;
   width: 90%;
+  margin-top: 20px;
 }
 
 .search-input {
@@ -220,7 +221,7 @@ main {
 }
 
 .anime-title {
-  font-size: 13px;
+  font-size: 15px;
   margin: 10px 0;
   white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
   text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que el texto se ha truncado */
