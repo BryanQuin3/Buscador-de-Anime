@@ -13,6 +13,7 @@ function createAnimeCard(anime, elemento) {
         <img class="cover-img" src="${src}" alt="">
         </figure>
         <p class="anime-title">${titleOfAnime}</p>
+        <p class="anime-genre">${anime.genres[0].name}</p>
         </article>`;
   elemento.innerHTML += animeContainer;
 }
@@ -38,7 +39,7 @@ menuBtn.addEventListener("click", () => {
 });
 
 // Search
-const searchBtn = document.querySelector(".search-container");
+const searchBtn = document.querySelector(".search");
 const searchInput = document.querySelector(".search-input-container");
 const heroContainer = document.querySelector(".hero-carousel");
 searchBtn.addEventListener("click", () => {
@@ -94,3 +95,44 @@ function nextCard() {
 setInterval(() => {
   nextCard();
 }, 3000);
+
+// Watching List
+const watchingList = document.querySelector(".anime-watching-container");
+function createWatchingCard(anime, episode, elemento) {
+  const titleOfAnime = anime.title;
+  const src = anime.images?.jpg?.large_image_url;
+  const duration = anime.duration.split(" ")[0] + " min";
+  const gender = anime.genres[0].name;
+  const animeContainer = `<article class="watching">
+        <div class="cover-container">
+          <img class="img-cover" src="${src}" alt="" />
+          <img class="play-icon" src="./img/watching.svg" alt="" />
+          <span class="minutes">${duration}</span>
+        </div>
+        <div class="watching-info">
+          <h5 class="watching-title">${titleOfAnime}</h5>
+          <p class="watching-episode">${episode}</p>
+          <p class="anime-genre">${gender}</p>
+        </div>
+  </article>`;
+  elemento.innerHTML += animeContainer;
+}
+
+const watchingListApi = `https://api.jikan.moe/v4/seasons/now?&limit=2`;
+fetch(watchingListApi)
+  .then((response) => response.json())
+  .then((response) => {
+    const animes = response.data;
+    animes.forEach((anime) => {
+      const id = anime.mal_id;
+      setTimeout(() => {
+        fetch(`https://api.jikan.moe/v4/anime/${id}/episodes`)
+          .then((response) => response.json())
+          .then((response) => {
+            const episodes = response.data;
+            const episode = episodes[0].title;
+            createWatchingCard(anime, episode, watchingList);
+          });
+      }, 1000);
+    });
+  });

@@ -159,8 +159,14 @@ a:hover {
   border-radius: 50%;
 }
 
-.results-container,
 main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.results-container {
   display: grid;
   place-items: center;
   align-items: flex-start;
@@ -228,6 +234,12 @@ main {
   text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que el texto se ha truncado */
   overflow: hidden; /* Oculta el contenido que se desborda del párrafo */
   max-width: 100%;
+}
+
+.anime-genre {
+  color: var(--tertiaryColor);
+  font-size: 15px;
+  margin: 0;
 }
 
 .main-list {
@@ -379,9 +391,96 @@ main {
   width: 100%;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.right {
+  transform: rotate(270deg);
+}
+
+.watching {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .anime-list {
   width: 90%;
   margin-left: 30px;
+}
+
+.img-cover {
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.cover-container {
+  position: relative;
+}
+
+.cover-container::after {
+  content: "";
+  position: absolute;
+  bottom: 7%;
+  left: 0;
+  width: 20px;
+  height: 4px;
+  background-color: var(--oragenge);
+}
+
+.cover-container > .play-icon {
+  opacity: 1;
+  width: 25px;
+  height: auto;
+}
+
+.minutes {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  padding: 4px;
+  font-weight: 600;
+  bottom: 10%;
+  right: 5%;
+}
+
+.anime-watching-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.watching-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.watching-title {
+  color: var(--tertiaryColor);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.watching-episode {
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.watching-title,
+.watching-episode {
+  margin: 0;
 }
 
 .anime-list-scroll-wrapper {
