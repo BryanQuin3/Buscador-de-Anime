@@ -4,6 +4,7 @@
   --primaryColor: #c2c1c3;
   --secondaryColor: #141519;
   --tertiaryColor: #a0a0a0;
+  --newWidth: 0%;
 }
 body {
   background-color: #000;
@@ -306,13 +307,29 @@ main {
   width: 100%;
 }
 
+.card-img-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
 @media screen and (min-width: 769px) {
   /* Estilos para pantallas con un ancho mínimo de 769px (laptops) */
   .hero-carousel {
-    margin-bottom: 150px;
+    margin-bottom: 15px;
   }
   .card-img-container {
-    max-height: 410px;
+    max-height: 80vh;
+    overflow: hidden;
   }
   .card-img {
     max-height: 410px;
@@ -378,7 +395,7 @@ main {
   width: 60%;
   height: auto;
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -427,9 +444,9 @@ main {
 .cover-container::after {
   content: "";
   position: absolute;
-  bottom: 7%;
+  bottom: 6.8%;
   left: 0;
-  width: 20px;
+  width: var(--newWidth);
   height: 4px;
   background-color: var(--oragenge);
 }
@@ -464,6 +481,11 @@ main {
   gap: 10px;
 }
 
+@media (min-width: 769px) {
+  .watching-info {
+    gap: 0;
+  }
+}
 .watching-title {
   color: var(--tertiaryColor);
   font-size: 11px;
@@ -476,6 +498,25 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+
+@media (min-width: 769px) {
+  .anime-watching-container {
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .watching-title {
+    font-size: 14px;
+    white-space: normal;
+    text-align: left;
+    word-wrap: break-word;
+    width: auto;
+    max-width: 30ch;
+  }
+  .watching-episode {
+    font-size: 17px;
+  }
 }
 
 .watching-title,
@@ -494,4 +535,63 @@ main {
 
 .anime-list-scroll-wrapper::-webkit-scrollbar {
   display: none;
+}
+.anime-description {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .carousel-card {
+    display: flex;
+  }
+  .anime-about {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    bottom: 25%;
+    left: 5%;
+    width: 50%;
+    height: auto;
+    gap: 35px;
+  }
+  .anime-description {
+    display: block;
+    white-space: normal;
+    text-align: left;
+    word-wrap: break-word;
+    color: var(--primaryColor);
+    width: auto;
+    max-width: 40ch;
+  }
+  .carousel-btns {
+    justify-content: flex-start;
+    left: 5%;
+  }
+  .anime-logo {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 250px;
+    height: auto;
+  }
+  .anime-list {
+    width: 95%;
+  }
+  /* agregar efecto degradado negro desde la izquierda
+  hacia la derecha */
+  .card-img-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
 }

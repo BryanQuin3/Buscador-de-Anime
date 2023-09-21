@@ -96,15 +96,25 @@ setInterval(() => {
   nextCard();
 }, 3000);
 
+const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+function setWidth(timeLeft, id) {
+  const watchingVideo = document.querySelector(`#${id}`);
+  const timePercentage = Math.floor((timeLeft * 100) / 24);
+  watchingVideo.style.setProperty("--newWidth", `${timePercentage}%`);
+}
+
 // Watching List
 const watchingList = document.querySelector(".anime-watching-container");
-function createWatchingCard(anime, episode, elemento) {
+function createWatchingCard(id, anime, episode, timeLeft, elemento) {
   const titleOfAnime = anime.title;
   const src = anime.images?.jpg?.large_image_url;
-  const duration = anime.duration.split(" ")[0] + " min";
+  const duration = `${timeLeft} min`;
   const gender = anime.genres[0].name;
   const animeContainer = `<article class="watching">
-        <div class="cover-container">
+        <div class="cover-container" id=${id}>
           <img class="img-cover" src="${src}" alt="" />
           <img class="play-icon" src="./img/watching.svg" alt="" />
           <span class="minutes">${duration}</span>
@@ -118,7 +128,8 @@ function createWatchingCard(anime, episode, elemento) {
   elemento.innerHTML += animeContainer;
 }
 
-const watchingListApi = `https://api.jikan.moe/v4/seasons/now?&limit=2`;
+const watchingListApi = `https://api.jikan.moe/v4/seasons/now?&limit=3`;
+let idComponent = 0;
 fetch(watchingListApi)
   .then((response) => response.json())
   .then((response) => {
@@ -131,7 +142,12 @@ fetch(watchingListApi)
           .then((response) => {
             const episodes = response.data;
             const episode = episodes[0].title;
-            createWatchingCard(anime, episode, watchingList);
+            const timeLeft = getRandomNumber(1, 24);
+            const time = 24 - timeLeft;
+            const idName = `anime-${idComponent}`;
+            createWatchingCard(idName, anime, episode, time, watchingList);
+            setWidth(timeLeft, idName);
+            idComponent++;
           });
       }, 1000);
     });
