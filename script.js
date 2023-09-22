@@ -1,5 +1,29 @@
-// API
-const animeList = document.querySelector(".list-container");
+function getDay() {
+  // Obtener el día de la semana
+  const date = new Date();
+  const day = date.getDay();
+  // Obtener el nombre del día de la semana en ingles
+  const days = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ];
+  const dayName = days[day - 1];
+  return dayName;
+}
+
+const day = getDay();
+const urlDay = `https://api.jikan.moe/v4/schedules?filter=${day}`;
+const dayContainer = document.querySelector(".day-container");
+
+setTimeout(getAnimes(urlDay, dayContainer), 1000);
+
+// Recomendations
+const animeList = document.querySelector(".recommendations");
 const apiUrl = `https://api.jikan.moe/v4/top/anime`;
 
 function createAnimeCard(anime, elemento) {
@@ -18,14 +42,18 @@ function createAnimeCard(anime, elemento) {
   elemento.innerHTML += animeContainer;
 }
 
-fetch(apiUrl)
-  .then((response) => response.json())
-  .then((response) => {
-    const animes = response.data;
-    animes.forEach((anime) => {
-      createAnimeCard(anime, animeList);
+function getAnimes(url, elemento) {
+  fetch(url)
+    .then((response) => response.json())
+    .then((response) => {
+      const animes = response.data;
+      animes.forEach((anime) => {
+        createAnimeCard(anime, elemento);
+      });
     });
-  });
+}
+
+setTimeout(getAnimes(apiUrl, animeList), 1000);
 
 // Menu
 const menuBtn = document.querySelector(".header-svg-icon");
@@ -77,7 +105,12 @@ searchInput.addEventListener("keyup", (event) => {
 // Slider
 const container = document.querySelector(".carousel-container");
 const cards = document.querySelectorAll(".carousel-card");
+const nextBtn = document.querySelector(".position-right");
+const prevBtn = document.querySelector(".position-left");
 let currentIndex = 0;
+let intervalId;
+let touchStartX = 0;
+let touchEndX = 0;
 
 function scrollToCard(index) {
   const card = cards[index];
@@ -92,9 +125,43 @@ function nextCard() {
   scrollToCard(currentIndex);
 }
 
-setInterval(() => {
+function startSlider() {
+  intervalId = setInterval(() => {
+    nextCard();
+  }, 3000);
+}
+
+startSlider();
+
+container.addEventListener("touchstart", (e) => {
+  clearInterval(intervalId);
+  touchStartX = e.touches[0].clientX;
+});
+
+container.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].clientX;
+
+  if (touchEndX < touchStartX) {
+    nextCard();
+  } else if (touchEndX > touchStartX) {
+    currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+    scrollToCard(currentIndex);
+  }
+  startSlider();
+});
+
+prevBtn.addEventListener("click", () => {
+  clearInterval(intervalId);
+  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+  scrollToCard(currentIndex);
+  startSlider();
+});
+
+nextBtn.addEventListener("click", () => {
+  clearInterval(intervalId);
   nextCard();
-}, 3000);
+  startSlider();
+});
 
 const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
@@ -149,6 +216,6 @@ fetch(watchingListApi)
             setWidth(timeLeft, idName);
             idComponent++;
           });
-      }, 1000);
+      }, 1500);
     });
   });

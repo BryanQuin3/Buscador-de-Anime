@@ -230,7 +230,7 @@ main {
 
 .anime-title {
   font-size: 15px;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
   white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
   text-overflow: ellipsis; /* Agrega puntos suspensivos (...) para indicar que el texto se ha truncado */
   overflow: hidden; /* Oculta el contenido que se desborda del párrafo */
@@ -268,6 +268,35 @@ main {
 
 .hero-carousel {
   overflow: hidden;
+}
+
+.carousel-btns-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.carousel-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.carousel-btn:hover {
+  cursor: pointer;
+}
+
+.carousel-btn > img {
+  width: 55px;
+  height: auto;
+}
+
+.position-right > img {
+  transform: rotate(180deg);
 }
 
 .carousel-container {
@@ -421,7 +450,7 @@ main {
 
 .watching {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 15px;
 }
 
@@ -483,13 +512,25 @@ main {
 
 @media (min-width: 769px) {
   .watching-info {
-    gap: 0;
+    gap: 13px;
   }
 }
 .watching-title {
   color: var(--tertiaryColor);
   font-size: 11px;
   text-transform: uppercase;
+  white-space: nowrap;
+  word-wrap: break-word;
+  width: auto;
+  max-width: 25ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 575px) {
+  .watching-title {
+    max-width: none;
+  }
 }
 
 .watching-episode {
@@ -513,6 +554,9 @@ main {
     word-wrap: break-word;
     width: auto;
     max-width: 30ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .watching-episode {
     font-size: 17px;
@@ -579,8 +623,6 @@ main {
   .anime-list {
     width: 95%;
   }
-  /* agregar efecto degradado negro desde la izquierda
-  hacia la derecha */
   .card-img-container::after {
     content: "";
     position: absolute;
@@ -593,5 +635,42 @@ main {
       rgba(0, 0, 0, 0.8) 0%,
       rgba(0, 0, 0, 0) 100%
     );
+  }
+}
+
+.banner {
+  display: grid;
+  width: 90%;
+  margin-left: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.banner:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.banner-img-sm {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.banner-img-xl {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .banner {
+    width: 95%;
+  }
+  .banner-img-sm {
+    display: none;
+  }
+  .banner-img-xl {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 }
