@@ -97,6 +97,12 @@ a:hover {
   gap: 18px;
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search-container {
   display: flex;
   justify-content: center;
@@ -175,6 +181,10 @@ main {
   min-height: 100vh;
   background-color: #000;
   gap: 18px;
+}
+
+.results {
+  margin-bottom: 20px;
 }
 
 .anime-container {
@@ -651,7 +661,7 @@ main {
 }
 
 .banner-img-sm {
-  width: 100%;
+  width: 95%;
   height: auto;
   object-fit: cover;
 }

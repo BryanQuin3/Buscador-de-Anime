@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Descubre lo mejor del anime y el manga con Crunchyroll. Disfruta de títulos de éxito como Guardianes de la Noche, One Piece, Attack on Titan y My Hero Academia entre toda una variedad de géneros. Desde shonens repletos de acción a shojos encantadores y mucho más, ofrecemos una gran variedad de títulos para todos los gustos. Suscríbete hoy mismo con una prueba gratuita ¡y sumérgete en el apasionante mundo del anime!"
+    />
+    <link rel="shortcut icon" href="./img/Crunchyroll_Logo.png" type="image" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Search</title>
+  </head>
+  <body>
+    <header>
+      <section class="nav-container">
+        <a class="logo-container" href="./index.html">
+          <img class="logo" src="./img/crunchyroll-logo.png" alt="" />
+        </a>
+        <nav>
+          <svg
+            class="header-svg-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            data-t="menu-svg"
+            aria-labelledby="menu-svg"
+            aria-hidden="true"
+            role="img"
+          >
+            <title id="menu-svg">Menú</title>
+            <path
+              d="M21 4a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2h18zm0 7a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2h18zm0 7a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2h18z"
+            ></path>
+          </svg>
+          <div class="menu-phone hidden">
+            <small>Explorar</small>
+            <ul class="main-list">
+              <li><a href="#">Popular</a></li>
+              <li><a href="#">Novedades</a></li>
+              <li><a href="#">Alfabético</a></li>
+              <li><a href="#">Temporada de Simulcasts</a></li>
+              <li><a href="#">Temporada de Simulcasts</a></li>
+              <li><a href="#">Calendario de lanzamientos</a></li>
+              <li><a href="#">Videos musicales y conciertos</a></li>
+              <li class="link-arrow-container">
+                <a href="#">Generos</a>
+                <img class="arrow" src="./img/down-arrow.svg" alt="" />
+              </li>
+            </ul>
+            <ul>
+              <li><a href="#">Manga</a></li>
+              <li><a href="#">Juegos</a></li>
+              <li class="link-arrow-container">
+                <a href="#">Noticias</a>
+                <img class="arrow" src="./img/down-arrow.svg" alt="" />
+              </li>
+            </ul>
+          </div>
+          <div class="menu-desktop hidden">
+            <ul>
+              <li>
+                <a href="#">Explorar</a>
+                <img src="./img/down-arrow.svg" alt="" />
+              </li>
+              <li><a href="#">Manga</a></li>
+              <li><a href="#">Juegos</a></li>
+              <li>
+                <a href="#">Noticias</a>
+                <img src="./img/down-arrow.svg" alt="" />
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </section>
+      <section class="search-container">
+        <a class="search" id="search-btn">
+          <img src="./img/search.svg" alt="" />
+        </a>
+        <div class="user">
+          <img class="user-profile" src="./img/user.jpg" alt="" />
+          <img class="arrow" src="./img/down-arrow.svg" alt="" />
+        </div>
+      </section>
+    </header>
+    <div class="search-input-container" id="search-input">
+      <input
+        class="search-input"
+        type="search"
+        placeholder="Naruto, One Piece, Evangelion..."
+        name="search"
+        id="search"
+      />
+      <section class="results-container results"></section>
+    </div>
+    <script src="./search.js"></script>
+  </body>
+</html>
